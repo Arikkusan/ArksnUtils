@@ -1,0 +1,6 @@
+name: ArksnUtils
+version: '${project.version}'
+main: fr.arikkusan.arksnutils.Main
+api-version: 1.19
+authors: [ Arikkusan ]
+description: Plugin giving other plugins dependent on mine plenty of commands and necessary function

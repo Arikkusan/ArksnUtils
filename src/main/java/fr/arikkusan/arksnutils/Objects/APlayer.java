@@ -7,7 +7,7 @@ public class APlayer {
     private Player player;
     private String role;
     private ATeam team;
-    private final boolean locked;
+    private boolean locked;
     private int passwordAttempts;
 
     public APlayer(Player p) {
@@ -47,7 +47,7 @@ public class APlayer {
     }
 
     public void setLocked(boolean locked) {
-        locked = locked;
+        this.locked = locked;
     }
 
     public int getPasswordAttempts() {

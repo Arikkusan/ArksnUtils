@@ -3,6 +3,7 @@ package fr.arikkusan.arksnutils.Listeners;
 import fr.arikkusan.arksnutils.Objects.APlayer;
 import fr.arikkusan.arksnutils.Objects.APlayerList;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,8 +14,10 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class JoinQuitListener implements Listener {
 
     private final APlayerList aPlayers;
+    private final String message;
 
-    public JoinQuitListener(APlayerList players) {
+    public JoinQuitListener(String message, APlayerList players) {
+        this.message = message;
         this.aPlayers = players;
     }
 
@@ -23,7 +26,7 @@ public class JoinQuitListener implements Listener {
 
         Player p = e.getPlayer();
         p.sendMessage(
-                ChatColor.GOLD + "Bienvenu sur le serveur IUTopia !"
+                ChatColor.GOLD + message
         );
 
         e.setJoinMessage(
@@ -31,12 +34,19 @@ public class JoinQuitListener implements Listener {
         );
 
         if (aPlayers.containsPlayer(p)) return;
-        aPlayers.add(new APlayer(p));
 
-        p.sendMessage(
-                ChatColor.GOLD + "Veuillez renseigner le mot de passe pour pouvoir jouer avec la commande /password <password>"
-        );
-        //p.playSound(p.getLocation(), Sound.AMBIENCE_THUNDER, 1F, 1F);
+        APlayer player = new APlayer(p);
+
+        if (p.isOp()) player.setLocked(false);
+        else {
+            p.sendMessage(ChatColor.GOLD + "Veuillez renseigner le mot de passe pour pouvoir jouer avec la commande /password <password>");
+            p.setGameMode(GameMode.SPECTATOR);
+        }
+
+        aPlayers.add(player);
+
+
+        p.playSound(p.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 1F, 1F);
 
 
 

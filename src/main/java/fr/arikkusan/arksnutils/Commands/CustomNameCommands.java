@@ -2,6 +2,7 @@ package fr.arikkusan.arksnutils.Commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -81,6 +82,8 @@ public class CustomNameCommands implements CommandExecutor, TabCompleter {
 
         p.setCustomName(pseudo);
         p.setDisplayName(p.getCustomName());
+        p.setPlayerListName(p.getDisplayName());
+        p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_YES, 1F, 1F);
         p.sendMessage(
                 ChatColor.GOLD +
                         "Votre surnom a été défini en tant que " +

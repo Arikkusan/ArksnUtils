@@ -22,12 +22,35 @@ public class gmCommands implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player p = (Player) sender;
 
-        GameMode gameMode = p.getGameMode();
+        if (args.length == 0) {
 
-        if (gameMode.equals(GameMode.SURVIVAL))
-            p.setGameMode(GameMode.CREATIVE);
-        else
-            p.setGameMode(GameMode.SURVIVAL);
+            GameMode gameMode = p.getGameMode();
+
+            if (gameMode.equals(GameMode.SURVIVAL))
+                p.setGameMode(GameMode.CREATIVE);
+            else
+                p.setGameMode(GameMode.SURVIVAL);
+
+            return true;
+        }
+
+        int gmVal = Integer.parseInt(args[0]);
+
+        switch (gmVal) {
+            case 0:
+                p.setGameMode(GameMode.SURVIVAL);
+                break;
+            case 1:
+                p.setGameMode(GameMode.CREATIVE);
+                break;
+            case 2:
+                p.setGameMode(GameMode.ADVENTURE);
+                break;
+            case 3:
+                p.setGameMode(GameMode.SPECTATOR);
+                break;
+        }
+
 
 
         return true;

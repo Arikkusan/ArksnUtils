@@ -3,6 +3,8 @@ package fr.arikkusan.arksnutils.Commands;
 import fr.arikkusan.arksnutils.Objects.APlayer;
 import fr.arikkusan.arksnutils.Objects.APlayerList;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,11 +16,12 @@ import java.util.List;
 
 public class PasswordCommand implements CommandExecutor, TabCompleter {
     private final APlayerList aPlayers;
-    private String BRUT_PASSWORD = "Arikkusan";
+    private final ArrayList<String> passwords;
 
 
-    public PasswordCommand(APlayerList players) {
+    public PasswordCommand(APlayerList players, ArrayList<String> password) {
         this.aPlayers = players;
+        this.passwords = password;
     }
 
     @Override
@@ -33,7 +36,7 @@ public class PasswordCommand implements CommandExecutor, TabCompleter {
             p.sendMessage(
                     ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "Vous êtes déjà connecté !"
             );
-            // p.playSound(p.getLocation(), Sound.VILLAGER_NO, 1F, 1F);
+            p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 1F, 1F);
             return true;
         }
 
@@ -41,22 +44,23 @@ public class PasswordCommand implements CommandExecutor, TabCompleter {
             p.sendMessage(
                     ChatColor.RED + "" + ChatColor.BOLD + "Use /password <password>"
             );
-            // p.playSound(p.getLocation(), Sound.VILLAGER_NO, 1F, 1F);
+            p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 1F, 1F);
             return true;
         }
 
-        if (!args[0].equals(BRUT_PASSWORD)) {
+        if (!passwords.contains(args[0])) {
             p.sendMessage(
                     ChatColor.RED + "" + ChatColor.BOLD + "Wrong password !"
             );
-            // p.playSound(p.getLocation(), Sound.VILLAGER_NO, 1F, 1F);
+            p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 1F, 1F);
             return true;
         }
 
         p.sendMessage(
                 ChatColor.GREEN + "" + ChatColor.BOLD + "Password correct !"
         );
-
+        p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_YES, 1F, 1F);
+        p.setGameMode(GameMode.SPECTATOR);
         ap.setLocked(false);
 
         aPlayers.remove(aPlayers.getAPlayer(p));

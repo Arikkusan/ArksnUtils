@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
  * The IMenu interface represents a menu with a name, size, content, and click actions.
  */
 // Interface from "Alexis Dalle - Creation d'un plugin spigot 1.8 #23"
-interface IMenu {
+public interface IMenu {
     String name();
 
     int getSize();

@@ -43,4 +43,18 @@ public class MenuManager {
         p.openInventory(inv);
 
     }
+
+    /**
+     * Retrieves the menu with the given name.
+     *
+     * @param inventoryTitle the name of the menu
+     * @return the menu with the given name, or null if there is no menu with this name
+     * @see IMenu#name()
+     */
+    public static Menu getInventoryWithName(String inventoryTitle) {
+        for (Menu menu : menus.values()) {
+            if (inventoryTitle.equals(menu.name())) return menu;
+        }
+        return null;
+    }
 }

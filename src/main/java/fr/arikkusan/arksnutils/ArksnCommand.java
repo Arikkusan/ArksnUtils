@@ -33,9 +33,14 @@ public abstract class ArksnCommand implements CommandExecutor, TabCompleter {
     @Override
     public final boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         this.commandName = cmd.getName();
-        if (sender instanceof Player player) return playerCommand(player, args);
-        else return consoleCommand(sender, args);
+        boolean commandResult;
+        if (sender instanceof Player) {
+            commandResult = playerCommand((Player) sender, args);
+        } else {
+            commandResult = consoleCommand(sender, args);
+        }
 
+        return commandResult;
     }
 
     /**

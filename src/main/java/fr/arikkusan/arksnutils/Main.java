@@ -23,8 +23,13 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        // we set the plugin 'singleton' like
         plugin = this;
 
+        // send a message
+        getServer().getConsoleSender().sendMessage(ChatColor.DARK_GREEN + this.getName() + " launched sucessfully!");
+
+        // we add the listeners to the plugin
         addListener(new GuiListener());
 
     }

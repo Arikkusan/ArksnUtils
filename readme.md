@@ -99,18 +99,16 @@ public class MyCommand extends ArksnCommand {
 After that you'll need to register your command in your main class :
 
 ```java
-import fr.arikkusan.arksnutils.ArksnCommand;
+import fr.arikkusan.arksnutils.ArksnCommand;import fr.arikkusan.arksnutils.ArksnUtilsMain;
 
 public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        registerCommand("mycommand", new MyCommand());
+        // add your command to the plugin command list (don't forget to add the command to your plugin.yml file)
+        ArksnUtilsMain.addCommand(this, "mycommand", new MyCommand());
     }
     
-    public void registerCommand(String commandName, ArksnCommand command) {
-        getCommand(commandName).setExecutor(command);
-    }
 }
 ```
 

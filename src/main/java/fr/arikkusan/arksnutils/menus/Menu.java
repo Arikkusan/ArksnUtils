@@ -1,6 +1,6 @@
 package fr.arikkusan.arksnutils.menus;
 
-import fr.arikkusan.arksnutils.Utils;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -45,14 +45,13 @@ public abstract class Menu implements IMenu {
      * @param line the line to fill
      * @param item the item to fill with
      */
-    protected final void fillLine(int line, ItemStack item) {
+    protected final void fillLine(int line, Material item) {
         int i = line;
         if (i < 0) i = 0;
         if (i > 5) i = 5;
         for (int j = 0; j < 9; j++) {
             if (buttons.containsKey(j + i * 9)) continue;
-            Utils.setName(item, "");
-            addButton(j + i * 9, new MenuButton(item, null));
+            addButton(j + i * 9, new MenuButton(item, "", null));
         }
     }
 
@@ -64,18 +63,6 @@ public abstract class Menu implements IMenu {
      */
     protected final void addButton(int slot, MenuButton button) {
         buttons.put(slot, button);
-    }
-
-    /**
-     * add a button to the menu
-     *
-     * @param slot       the slot to fill
-     * @param itemName   the name of the item
-     * @param menuButton the action to be performed when the button is clicked by a player
-     */
-    protected final void addButton(int slot, MenuButton menuButton, String itemName) {
-        menuButton.setItemName(itemName);
-        buttons.put(slot, menuButton);
     }
 
     @Override

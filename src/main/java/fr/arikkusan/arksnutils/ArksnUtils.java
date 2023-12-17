@@ -7,12 +7,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The Utils class contains utility methods.
  */
-public class Utils {
+public class ArksnUtils {
 
     /**
      * Sets the name of an ItemStack
@@ -43,6 +44,31 @@ public class Utils {
     }
 
     /**
+     * Sets the lore of an ItemStack
+     *
+     * @param itemStack the ItemStack to set the lore of
+     * @param lore      the new lore for the ItemStack
+     */
+    public static void addLore(ItemStack itemStack, String lore) {
+
+        ItemMeta data = itemStack.getItemMeta();
+
+        // We get the lore of the item
+        List<String> loreList = data.getLore();
+
+        // If the lore is null, we create a new list
+        if (loreList == null)
+            loreList = new ArrayList<>();
+
+        // We add the new lore
+        loreList.add(lore);
+
+        // We set the new lore
+        setLore(itemStack, loreList);
+
+    }
+
+    /**
      * Creates a player head ItemStack with the given player as owner, so the skin of the head will be the skin of the given player.
      *
      * @param player the player to create the head of
@@ -60,7 +86,7 @@ public class Utils {
         meta.setOwningPlayer(player);
         playerHead.setItemMeta(meta);
         // set the name of the player head
-        Utils.setName(playerHead, ChatColor.GREEN + ChatColor.stripColor(player.getDisplayName()));
+        ArksnUtils.setName(playerHead, ChatColor.GREEN + ChatColor.stripColor(player.getDisplayName()));
         return playerHead;
     }
 }

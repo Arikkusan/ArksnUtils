@@ -11,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
-public final class Main extends JavaPlugin {
+public final class ArksnUtilsMain extends JavaPlugin {
 
     private static Plugin plugin;
 
@@ -39,7 +39,7 @@ public final class Main extends JavaPlugin {
      */
     @Nullable
     public static void enableMenu(Sound clickSound) {
-        ((Main) plugin).addListener(clickSound != null ? new GuiListener(clickSound) : new GuiListener());
+        ((ArksnUtilsMain) plugin).addListener(clickSound != null ? new GuiListener(clickSound) : new GuiListener());
     }
 
     @Override
@@ -54,12 +54,12 @@ public final class Main extends JavaPlugin {
      * @param label   The label of the command.
      * @param command The ArksnCommand object that will handle the command execution and tab completion.
      */
-    private void addCommandAndTabCompleter(String label, ArksnCommand command) {
+    public static void addCommand(JavaPlugin plugin, String label, ArksnCommand command) {
         try {
-            Objects.requireNonNull(getCommand(label)).setTabCompleter(command);
-            Objects.requireNonNull(getCommand(label)).setExecutor(command);
+            Objects.requireNonNull(plugin.getCommand(label)).setTabCompleter(command);
+            Objects.requireNonNull(plugin.getCommand(label)).setExecutor(command);
         } catch (NullPointerException e) {
-            getServer().getConsoleSender().sendMessage(ChatColor.RED + String.format("The command %s is not written in the plugin.yml file!", label));
+            plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + String.format("The command %s is not written in your plugin.yml file!", label));
         }
     }
 

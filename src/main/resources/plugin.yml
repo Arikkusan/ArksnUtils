@@ -1,6 +1,6 @@
 name: ArksnUtils
 version: '${project.version}'
-main: fr.arikkusan.arksnutils.Main
+main: fr.arikkusan.arksnutils.ArksnUtilsMain
 api-version: '1.20'
 authors: [Alix Jaugey]
 website: alixjaugey.fr

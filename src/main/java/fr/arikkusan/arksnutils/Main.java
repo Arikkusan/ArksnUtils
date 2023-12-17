@@ -1,11 +1,14 @@
 package fr.arikkusan.arksnutils;
 
+import fr.arikkusan.arksnutils.commands.ArksnCommand;
 import fr.arikkusan.arksnutils.listener.GuiListener;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import javax.annotation.Nullable;
 import java.util.Objects;
 
 public final class Main extends JavaPlugin {
@@ -26,12 +29,17 @@ public final class Main extends JavaPlugin {
         // we set the plugin 'singleton' like
         plugin = this;
 
-        // send a message
-        getServer().getConsoleSender().sendMessage(ChatColor.DARK_GREEN + this.getName() + " launched sucessfully!");
+    }
 
-        // we add the listeners to the plugin
-        addListener(new GuiListener());
 
+    /**
+     * Sets the click sound of the GUIs.
+     *
+     * @param clickSound the sound to play when a player clicks in a GUI
+     */
+    @Nullable
+    public static void enableMenu(Sound clickSound) {
+        ((Main) plugin).addListener(clickSound != null ? new GuiListener(clickSound) : new GuiListener());
     }
 
     @Override

@@ -47,7 +47,6 @@ dependencies {
 }
 ```
 
-## How to use the plugin
 
 First of all you must add it to your plugin.yml file :
 
@@ -60,7 +59,8 @@ depend: [ArksnUtils] # or softdepend
 > If you necessarily need the plugin to work, you must use a depend and not a softdepend. Moreover, if you use a depend 
 > don't forget to add the ArksnUtils.jar file to your server plugins folder. 
 
-### ArksnCommand class
+## How to use the plugin
+### 1. ArksnCommand class
 
 I really like the way the commands are handled in the Spigot API. However, I find it a bit too complicated to use. That's 
 why I created the ArksnCommand class. It allows you to create a command in a few lines of code. Here is an example of a
@@ -115,7 +115,7 @@ public class Main extends JavaPlugin {
 When a player execute the command, it will call the playerCommand method. If the sender is not a player, it will call
 
 
-### ArksnMenu class
+### 2. ArksnMenu class
 
 To create a new Menu you can use the following code :
 
@@ -191,15 +191,16 @@ To open the menu you can use the following code :
 MenuManager.openMenu(player, MyMenu.class);
 ```
 
-### Utils class
+### 3. Utils class
 
 The Utils class contains a lot of useful methods that will help you with your plugins. Here is a list of the methods
 that are currently available :
-> setName(ItemStack item, String name) : set the name of an item
-
-> setLore(ItemStack item, List<String> lore) : set the lore of an item (each line must be colored)
-
-> addLore(ItemStack item, List<String> lore) : add a lore line to an item
-
-> getSkull(Player player) : get the skull of a player
+```java
+{
+    void setName(ItemStack item, String name); // set the player invulnerable for a certain amount of time
+    void setLore(ItemStack item, List<String> lore); // set the lore of an item (each line must be colored)
+    void addLore(ItemStack item, String lore); // add a lore line to an item
+    ItemStack getSkull(Player player); // get the skull of a player
+}
+```
 

@@ -60,6 +60,63 @@ depend: [ArksnUtils] # or softdepend
 > If you necessarily need the plugin to work, you must use a depend and not a softdepend. Moreover, if you use a depend 
 > don't forget to add the ArksnUtils.jar file to your server plugins folder. 
 
+### ArksnCommand class
+
+I really like the way the commands are handled in the Spigot API. However, I find it a bit too complicated to use. That's 
+why I created the ArksnCommand class. It allows you to create a command in a few lines of code. Here is an example of a
+command that will send a message to the player who executed it :
+
+```java
+import fr.arikkusan.arksnutils.ArksnCommand;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+public class MyCommand extends ArksnCommand {
+
+    @Override
+    protected boolean playerCommand(Player player, String[] args) {
+        player.sendMessage("Hello " + player.getName());
+        player.sendMessage("You used the command " + commandName);
+        return true;
+    }
+    
+    @Override
+    protected boolean consoleCommand(CommandSender sender, String[] args) {
+        // This function is optional and if you don't need it you can delete it, 
+        // it will automatically send a message to the sender telling him that 
+        // he must be a player to execute this command
+        sender.sendMessage("Hello console");
+        return true;
+    }
+    
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+        return null;
+    }
+}
+```
+
+After that you'll need to register your command in your main class :
+
+```java
+import fr.arikkusan.arksnutils.ArksnCommand;
+
+public class Main extends JavaPlugin {
+
+    @Override
+    public void onEnable() {
+        registerCommand("mycommand", new MyCommand());
+    }
+    
+    public void registerCommand(String commandName, ArksnCommand command) {
+        getCommand(commandName).setExecutor(command);
+    }
+}
+```
+
+When a player execute the command, it will call the playerCommand method. If the sender is not a player, it will call
+
+
 ### ArksnMenu class
 
 To create a new Menu you can use the following code :

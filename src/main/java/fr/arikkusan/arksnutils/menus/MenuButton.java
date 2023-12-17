@@ -1,6 +1,7 @@
 package fr.arikkusan.arksnutils.menus;
 
-import fr.arikkusan.arksnutils.Utils;
+import fr.arikkusan.arksnutils.ArksnUtils;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -18,18 +19,18 @@ public class MenuButton {
     /**
      * Creates a MenuButton with the given ItemStack and click action.
      *
-     * @param item        the ItemStack representing the button
+     * @param material    the material representing the button
      * @param clickAction the action to be performed when the button is clicked by a player
      */
-    public MenuButton(ItemStack item, Consumer<Player> clickAction) {
-        this.item = item;
+    public MenuButton(Material material, Consumer<Player> clickAction) {
+        this.item = new ItemStack(material);
         this.clickAction = clickAction;
     }
 
 
-    public MenuButton(ItemStack item, String itemName, Consumer<Player> clickAction) {
-        this.item = item;
-        Utils.setName(item, itemName);
+    public MenuButton(Material material, String itemName, Consumer<Player> clickAction) {
+        item = new ItemStack(material);
+        ArksnUtils.setName(item, itemName);
         this.clickAction = clickAction;
     }
 
@@ -46,10 +47,10 @@ public class MenuButton {
     /**
      * Sets the ItemStack associated with this MenuButton.
      *
-     * @param item the new ItemStack representing the button
+     * @param material the new material representing the button => be aware that item customisation will be erased
      */
-    public void setItem(ItemStack item) {
-        this.item = item;
+    public void setItem(Material material) {
+        this.item = new ItemStack(material);
     }
 
     /**
@@ -58,7 +59,7 @@ public class MenuButton {
      * @param name the new name for the item
      */
     public void setItemName(String name) {
-        Utils.setName(item, name);
+        ArksnUtils.setName(item, name);
     }
 
     /**
@@ -67,7 +68,7 @@ public class MenuButton {
      * @param lore the new lore for the item
      */
     public void setItemLore(List<String> lore) {
-        Utils.setLore(item, lore);
+        ArksnUtils.setLore(item, lore);
     }
 
     /**

@@ -196,7 +196,7 @@ MenuManager.openMenu(player, MyMenu.class);
 The Utils class contains a lot of useful methods that will help you with your plugins. Here is a list of the methods
 that are currently available :
 ```java
-{
+private interface IUtils {
     void setName(ItemStack item, String name); // set the player invulnerable for a certain amount of time
     void setLore(ItemStack item, List<String> lore); // set the lore of an item (each line must be colored)
     void addLore(ItemStack item, String lore); // add a lore line to an item

@@ -1,4 +1,4 @@
-package fr.arikkusan.arksnutils;
+package fr.arikkusan.arksnutils.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
